@@ -1,0 +1,27 @@
+{
+  "name": "library",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-client": "npm start --prefix client",
+    "start-server": "npm start --prefix server",
+    "start": "concurrently \"npm run start-client\" \"npm run start-server\"",
+    "build-client": "npm run build --prefix client",
+    "build-server": "npm run build --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Artacalan/library.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Artacalan/library/issues"
+  },
+  "homepage": "https://github.com/Artacalan/library#readme"
+}
