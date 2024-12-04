@@ -1,8 +1,22 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-const app = express();
+
+export const app = express();
+
+// Enable CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 const port = 5000;
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
+
+
 
 interface Book {
   id: number;
@@ -52,6 +66,8 @@ let library: Library = {
 };
 
 let borrowers: Borrower[] = [];
+let borrowerId = 1;
+let bookId = 4;
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
@@ -59,6 +75,7 @@ app.get('/', (req, res) => {
 
 app.post('/library/login', (req, res) => { // Login to library
   const { key } = req.body;
+  console.log(req.body)
   if (key === library.key) {
     res.send(library);
   }
@@ -73,7 +90,7 @@ app.get('/library/books', (req, res) => { // Get all books
 
 app.post('/library/books', (req, res) => { // Add a book
   const book = req.body;
-  library.books.push(book);
+  library.books.push({id:bookId++, ...book});
   res.send(library.books);
 });
 
@@ -84,7 +101,7 @@ app.delete('/library/books/:id', (req, res) => { // Delete a book
 });
 
 app.post('/borrowers/register', (req, res) => { // Register a borrower
-  const borrower = req.body;
+  const borrower = {id: borrowerId++, ...req.body};
   borrower.books = [];
   borrowers.push(borrower);
   res.send(borrower);
