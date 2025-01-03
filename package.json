@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Artacalan/library/issues"
   },
-  "homepage": "https://github.com/Artacalan/library#readme"
+  "homepage": "https://github.com/Artacalan/library#readme",
+  "dependencies": {
+    "supertest": "^7.0.0"
+  }
 }
